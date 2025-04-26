@@ -30,7 +30,7 @@ namespace eCommerce.API.Middlewares
                     _logger.LogError($"{ ex.InnerException.GetType() } : { ex.InnerException.Message }");
                 }
                 httpContext.Response.StatusCode = 500;
-                await httpContext.Response.WriteAsJsonAsync(new {ex.Message, Type = ex.GetType()})
+                await httpContext.Response.WriteAsJsonAsync(new { ex.Message, Type = ex.GetType() });
             }
         }
     }
