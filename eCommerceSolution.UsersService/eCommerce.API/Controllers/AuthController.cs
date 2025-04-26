@@ -28,7 +28,7 @@ namespace eCommerce.API.Controllers
             }
             return Ok(authenticationResponse);
         }
-        [HttpPost("Login")]
+        [HttpPost("Login")] //api/auth/login
         public async Task<IActionResult> Login(LoginRequest loginRequest)
         {
             if(loginRequest == null)

@@ -1,21 +1,19 @@
-﻿using eCommerce.Core.DTO;
+﻿using AutoMapper;
+using eCommerce.Core.DTO;
 using eCommerce.Core.Entities;
 using eCommerce.Core.RepositoryContracts;
 using eCommerce.Core.ServiceContracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eCommerce.Core.Services
 {
     internal class UsersService : IUsersService
     {
         private readonly IUsersRepository _usersRepository;
-        public UsersService(IUsersRepository usersRepository)
+        private readonly IMapper _mapper;
+        public UsersService(IUsersRepository usersRepository, IMapper mapper)
         {
             _usersRepository = usersRepository;
+            _mapper = mapper;
         }
         public async Task<AuthenticationResponse?> Login(LoginRequest loginRequest)
         {
@@ -24,7 +22,7 @@ namespace eCommerce.Core.Services
             {
                 return null;
             }
-            return new AuthenticationResponse(user.UserId, user.Email, user.PersonName, user.Gender, "token", Success: true);
+            return _mapper.Map<AuthenticationResponse>(user) with { Success = true, Token = "token"};
         } 
 
         public async Task<AuthenticationResponse?> Register(RegisterRequest registerRequest)
@@ -41,8 +39,9 @@ namespace eCommerce.Core.Services
             {
                 return null;
             }
-            return new AuthenticationResponse(registeredUser.UserId, registeredUser.Email, registeredUser.PersonName, registeredUser.Gender, "token", Success: true);
-            throw new NotImplementedException();
+            //return new AuthenticationResponse(registeredUser.UserId, registeredUser.Email, registeredUser.PersonName, registeredUser.Gender, "token", Success: true);
+            return _mapper.Map<AuthenticationResponse>(user) with { Success = true, Token = "token" };
+
         }
     }
 }
