@@ -6,7 +6,7 @@ using ProductsService.API.Middlewares;
 var builder = WebApplication.CreateBuilder(args);
 //Add Business Logic Layer and DAL
 builder.Services.AddBusinessLogicLayer();
-builder.Services.AddDataAccessLayer();
+builder.Services.AddDataAccessLayer(builder.Configuration);
 
 builder.Services.AddControllers();
 
@@ -21,6 +21,6 @@ app.UseRouting();
 app.UseAuthorization();
 app.UseAuthentication();
 
-app.MapGet("/", () => "Hello World!");
+app.MapControllers();
 
 app.Run();
