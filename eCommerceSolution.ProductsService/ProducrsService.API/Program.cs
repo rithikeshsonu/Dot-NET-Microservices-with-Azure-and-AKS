@@ -1,3 +1,4 @@
+using eCommerce.ProductsService.API.APIEndpoints;
 using eCommerce.ProductsService.BusinessLogicLayer;
 using eCommerce.ProductsService.DataAccessLayer;
 using FluentValidation.AspNetCore;
@@ -22,5 +23,5 @@ app.UseAuthorization();
 app.UseAuthentication();
 
 app.MapControllers();
-
+app.MapProductAPIEndpoints();
 app.Run();
