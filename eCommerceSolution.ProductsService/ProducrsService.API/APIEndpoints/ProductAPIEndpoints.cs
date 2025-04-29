@@ -28,9 +28,9 @@ namespace eCommerce.ProductsService.API.APIEndpoints
             {
                 List<ProductResponse?> productsByProductName = await productsService.GetProductsByCondition(temp => temp.ProductName != null && temp.ProductName.Contains(searchString, StringComparison.OrdinalIgnoreCase));
 
-                List<ProductResponse?> productsByProductId = await productsService.GetProductsByCondition(temp => temp.Category != null && temp.Category.Contains(searchString, StringComparison.OrdinalIgnoreCase));
+                List<ProductResponse?> productsByCategory = await productsService.GetProductsByCondition(temp => temp.Category != null && temp.Category.Contains(searchString, StringComparison.OrdinalIgnoreCase));
 
-                var products = productsByProductName.Union(productsByProductId);
+                var products = productsByProductName.Union(productsByCategory);
                 return Results.Ok(products);
             });
 
